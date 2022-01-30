@@ -1,34 +1,30 @@
 package hello.hellospring.service;
 
+import hello.hellospring.Repository.MemberRepository;
 import hello.hellospring.Repository.MemoryMemberRepository;
 import hello.hellospring.domain.Member;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class MemberServiceTest {
+@SpringBootTest //스프링 컨테이너와 테스트를 함께 실행한다.
+@Transactional //commit 이 되지 않고 테스트 끝난 후 rollback이 된다.
+public class MemberServiceIntegrationTest {
 
-    MemberService memberService;
-    MemoryMemberRepository memberRepository;
-
-    @BeforeEach
-    public void beforeEach(){
-        memberRepository = new MemoryMemberRepository();
-        memberService = new MemberService(memberRepository);
-    }
-    @AfterEach
-    public void afterEach(){
-        memberRepository.clearStore();
-    }
+    @Autowired MemberService memberService;
+    @Autowired MemberRepository memberRepository;
 
     @Test
     void 회원가입() {
         //given
         Member member = new Member();
-        member.setName("hellow");
+        member.setName("you");
 
         //when
         Long saveId = memberService.join(member);
@@ -62,13 +58,7 @@ class MemberServiceTest {
 
         }
 */
+
     }
 
-    @Test
-    void findMembers() {
-    }
-
-    @Test
-    void findOne() {
-    }
 }

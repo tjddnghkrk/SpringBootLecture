@@ -5,15 +5,17 @@ import hello.hellospring.Repository.MemoryMemberRepository;
 import hello.hellospring.domain.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service //springboot에 등록을 해줌
+//@Service //springboot에 등록을 해줌
+@Transactional
 public class MemberService {
     private final MemberRepository memberRepository;
 
-    @Autowired
+  //  @Autowired
     public MemberService(MemberRepository memberRepository)
     {
         this.memberRepository = memberRepository;
